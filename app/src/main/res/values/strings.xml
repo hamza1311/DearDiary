@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Dear Diary</string>
+    <string name="action_settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="body">Body</string>
+    <string name="tag_name">Tag name</string>
+    <string name="tag_name_placeholder">Tag Name</string>
+    <string name="delete_tag_button">Delete tag button</string>
+    <string name="tag_icon">Tag icon</string>
+    <string name="detail">Details</string>
+    <string name="lock">Lock/Unlock this item</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preference_file_name">prefs</string>
+</resources>

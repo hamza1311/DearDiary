@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tags_nav_graph"
+    app:startDestination="@+id/tagsListFragment">
+
+    <fragment
+        android:id="@+id/tagsListFragment"
+        android:name="com.hamza.deardiary.ui.fragments.TagsListFragment"
+        android:label="fragment_tags_list"
+        tools:layout="@layout/fragment_tags_list">
+        <action
+            android:id="@+id/action_tagsListFragment_to_tagItemsFragment"
+            app:destination="@id/tagItemsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@+id/tagsListFragment" />
+        <action
+            android:id="@+id/action_toNewTagFragment"
+            app:destination="@id/newTagFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagItemsFragment"
+        android:name="com.hamza.deardiary.ui.fragments.TagItemsFragment"
+        android:label="fragment_tag_items"
+        tools:layout="@layout/fragment_tag_items">
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTagFragment"
+        android:name="com.hamza.deardiary.ui.fragments.NewTagFragment"
+        android:label="fragment_new_tag"
+        tools:layout="@layout/fragment_new_tag" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>

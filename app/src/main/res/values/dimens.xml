@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="textView_height">20dp</dimen>
+    <dimen name="list_margin">3dp</dimen>
+    <dimen name="button_corner_radius">10dp</dimen>
+    <dimen name="margins">8dp</dimen>
+    <dimen name="elevation">10dp</dimen>
+</resources>
