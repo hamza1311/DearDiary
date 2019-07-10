@@ -9,19 +9,20 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
-import com.hamza.deardiary.ui.viewmodels.DiaryItemVewModel
+import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
+import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.obtainItemTagViewModel
 import kotlinx.android.synthetic.main.fragment_item_details.*
 
 
 class ItemDetailsFragment : Fragment() {
     private lateinit var itemTagViewModel: ItemsTagViewModel
-    private lateinit var diaryItemVewModel: DiaryItemVewModel
+    private lateinit var diaryItemViewModel: DiaryItemViewModel
     private lateinit var currentItem: DiaryItem
     private val args: ItemDetailsFragmentArgs by navArgs()
 
@@ -37,15 +38,15 @@ class ItemDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
 
-        itemTagViewModel = ViewModelProviders.of(this).get(ItemsTagViewModel::class.java)
-        diaryItemVewModel = ViewModelProviders.of(this).get(DiaryItemVewModel::class.java)
+        itemTagViewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
+        diaryItemViewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
 
         itemTagViewModel.allItems.observe(this, Observer { list ->
             val tagsList = mutableListOf<String>()
             list.forEach { tagsList.add(it.tagName) }
             val arrayAdapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, tagsList)
 
-            diaryItemVewModel.get(id).observe(this@ItemDetailsFragment, Observer {
+            diaryItemViewModel.get(id).observe(this@ItemDetailsFragment, Observer {
                 currentItem = it
                 itemDetails_tags_spinner.setSelection(
                     arrayAdapter.getPosition(it.tag)
@@ -58,7 +59,7 @@ class ItemDetailsFragment : Fragment() {
 
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         currentItem.tag = tagsList[position]
-                        diaryItemVewModel.update(currentItem)
+                        diaryItemViewModel.update(currentItem)
 
                     }
                 }

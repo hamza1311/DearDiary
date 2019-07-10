@@ -35,9 +35,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation 'androidx.navigation:navigation-fragment-ktx:2.0.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
 
@@ -61,5 +59,37 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+
+//    Tests
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "com.google.truth:truth:0.44"
+    testImplementation "androidx.test:core-ktx:1.2.0-beta01"
+    testImplementation "androidx.test.ext:junit-ktx:1.1.1-beta01"
+    testImplementation "org.mockito:mockito-core:2.8.9"
+
+    // AndroidX Test - JVM testing
+    def androidXTestCoreVersion = '1.2.0'
+    def androidXTestExtKotlinRunnerVersion = '1.1.1-beta01'
+    def androidXTestRulesVersion = '1.2.0'
+    def fragmentVersion = '1.1.0-alpha07'
+    def coroutinesVersion = '1.2.1'
+
+    implementation "androidx.fragment:fragment-testing:$fragmentVersion"
+    implementation "androidx.test:core:$androidXTestCoreVersion"
+    implementation "androidx.fragment:fragment:$fragmentVersion"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "androidx.test:rules:$androidXTestRulesVersion"
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+//    Android tests
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    androidTestImplementation "org.mockito:mockito-core:2.8.9"
 
 }

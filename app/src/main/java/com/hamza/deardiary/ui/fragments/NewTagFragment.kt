@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.ItemTag
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
+import com.hamza.deardiary.util.obtainItemTagViewModel
 import kotlinx.android.synthetic.main.fragment_new_tag.*
 
 class NewTagFragment : Fragment() {
@@ -35,7 +35,7 @@ class NewTagFragment : Fragment() {
         newTag_colors_spinner.adapter =
             ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, colors.keys.toList())
 
-        itemsTagViewModel = ViewModelProviders.of(this).get(ItemsTagViewModel::class.java)
+        itemsTagViewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
 
         newTag_colors_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

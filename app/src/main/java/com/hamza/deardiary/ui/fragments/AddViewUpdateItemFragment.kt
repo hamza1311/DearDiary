@@ -1,22 +1,20 @@
 package com.hamza.deardiary.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
-import com.hamza.deardiary.ui.viewmodels.DiaryItemVewModel
+import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
+import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_add_view_update_item.*
 
 class AddViewUpdateItemFragment : Fragment() {
     private var currentId: Int = 0
-    private lateinit var viewModel: DiaryItemVewModel
+    private lateinit var viewModel: DiaryItemViewModel
     private lateinit var currentItem: DiaryItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +33,8 @@ class AddViewUpdateItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         currentId = activity?.intent?.extras?.getInt("id") ?: 0
-        viewModel = ViewModelProviders.of(this).get(DiaryItemVewModel::class.java)
+//        viewModel = ViewModelProviders.of(this).get(DiaryItemViewModel::class.java)
+        viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
 
         if (currentId != 0) {
             viewModel.get(currentId).observe(this, Observer {
@@ -115,9 +114,5 @@ class AddViewUpdateItemFragment : Fragment() {
             Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
             viewModel.update(currentItem)
         }
-    }
-
-    companion object {
-        const val ID = "last_saved_id"
     }
 }

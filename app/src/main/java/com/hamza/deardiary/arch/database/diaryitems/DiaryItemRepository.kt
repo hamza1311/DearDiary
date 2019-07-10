@@ -5,35 +5,23 @@ import androidx.lifecycle.LiveData
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
 
-class DiaryItemRepository(private val diaryItemDao: DiaryItemDao) {
+interface DiaryItemRepository {
 
     @WorkerThread
-    suspend fun addItem(item: DiaryItem) {
-        diaryItemDao.addItem(item)
-    }
+    suspend fun addItem(item: DiaryItem)
 
     @WorkerThread
-    suspend fun update(item: DiaryItem) {
-        diaryItemDao.updateItem(item)
-    }
+    suspend fun update(item: DiaryItem)
 
     @WorkerThread
-    fun getItem(id: Int): LiveData<DiaryItem> {
-        return diaryItemDao.getItem(id)
-    }
+    fun getItem(id: Int): LiveData<DiaryItem>
 
     @WorkerThread
-    fun getAllItems(): LiveData<List<DiaryItem>> {
-        return diaryItemDao.getAllItems()
-    }
+    fun getAllItems(): LiveData<List<DiaryItem>>
 
     @WorkerThread
-    suspend fun delete(id: Int) {
-        diaryItemDao.deleteItem(id)
-    }
+    suspend fun delete(id: Int)
 
     @WorkerThread
-    fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>> {
-        return diaryItemDao.getItemsWithSameTag(tag.tagName)
-    }
+    fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>>
 }

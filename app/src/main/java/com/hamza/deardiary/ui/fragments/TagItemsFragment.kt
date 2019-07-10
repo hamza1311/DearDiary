@@ -8,19 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.adapters.TagItemsListAdapter
-import com.hamza.deardiary.ui.viewmodels.DiaryItemVewModel
+import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
+import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.obtainItemTagViewModel
 import kotlinx.android.synthetic.main.fragment_tag_items.*
 
 class TagItemsFragment : Fragment() {
     private val args: TagItemsFragmentArgs by navArgs()
-    private lateinit var diaryItemViewModel: DiaryItemVewModel
+    private lateinit var diaryItemViewModel: DiaryItemViewModel
     private lateinit var itemTagVewModel: ItemsTagViewModel
     private lateinit var listAdapter: TagItemsListAdapter
 
@@ -36,8 +37,8 @@ class TagItemsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Toast.makeText(context, "${args.id}", Toast.LENGTH_LONG).show()
-        diaryItemViewModel = ViewModelProviders.of(this).get(DiaryItemVewModel::class.java)
-        itemTagVewModel = ViewModelProviders.of(this).get(ItemsTagViewModel::class.java)
+        diaryItemViewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
+        itemTagVewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
         listAdapter = TagItemsListAdapter(context!!)
 
 
@@ -56,7 +57,7 @@ class TagItemsFragment : Fragment() {
         }
 
         tagItems_delete_imageButton.setOnClickListener {
-            ViewModelProviders.of(this).get(ItemsTagViewModel::class.java).delete(args.id)
+            itemTagVewModel.delete(args.id)
             it.findNavController().popBackStack()
         }
 

@@ -1,24 +1,15 @@
 package com.hamza.deardiary.ui.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemDatabase
 import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
 import kotlinx.coroutines.launch
 
-class DiaryItemVewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: DiaryItemRepository
-    val allItems: LiveData<List<DiaryItem>>
-
-    init {
-        val dao = DiaryItemDatabase.getDatabase(application.applicationContext).diaryItemDao()
-        repository = DiaryItemRepository(dao)
-        allItems = repository.getAllItems()
-    }
+class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewModel() {
+    val allItems: LiveData<List<DiaryItem>> = repository.getAllItems()
 
     fun insert(item: DiaryItem) = viewModelScope.launch {
         repository.addItem(item)

@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.adapters.ItemsTagListAdapter
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
+import com.hamza.deardiary.util.obtainItemTagViewModel
 import kotlinx.android.synthetic.main.fragment_tags_list.*
 
 class TagsListFragment : Fragment() {
@@ -29,9 +29,7 @@ class TagsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.run {
-            viewModel = ViewModelProviders.of(this).get(ItemsTagViewModel::class.java)
-        }
+        viewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
 
         listAdapter = ItemsTagListAdapter(context!!)
         tagsList_fab.setOnClickListener {

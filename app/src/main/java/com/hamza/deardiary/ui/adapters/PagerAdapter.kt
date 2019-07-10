@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.hamza.deardiary.ui.fragments.ItemsListFragment
 import com.hamza.deardiary.ui.fragments.TagListNavHostFragment
 
-class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) { //Todo: Check this
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> ItemsListFragment()

@@ -8,20 +8,19 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.activities.NewUpdateOrViewDiaryItemActivity
 import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
-import com.hamza.deardiary.ui.viewmodels.DiaryItemVewModel
+import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
+import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
-import java.lang.Exception
 import kotlin.math.roundToInt
 
 class ItemsListFragment : Fragment() {
-    private lateinit var viewModel: DiaryItemVewModel
+    private lateinit var viewModel: DiaryItemViewModel
     private lateinit var listAdapter: DiaryItemListAdapter
 
     override fun onCreateView(
@@ -34,10 +33,7 @@ class ItemsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = activity?.run {
-            ViewModelProviders.of(this).get(DiaryItemVewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
+        viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -4,30 +4,19 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.hamza.deardiary.arch.models.ItemTag
 
-class ItemsTagRepository(private val itemsTagDao: ItemsTagDao) {
+interface ItemsTagRepository {
     @WorkerThread
-    suspend fun addTag(item: ItemTag) {
-        itemsTagDao.addTag(item)
-    }
-
-//    This function is not needed. Its just here coz why not
-    @WorkerThread
-    suspend fun updateTag(item: ItemTag) {
-        itemsTagDao.updateTag(item)
-    }
+    suspend fun addTag(item: ItemTag)
 
     @WorkerThread
-    suspend fun delete(id: Int) {
-        itemsTagDao.deleteTag(id)
-    }
+    suspend fun updateTag(item: ItemTag)
 
     @WorkerThread
-    fun getTag(id: Int): LiveData<ItemTag> {
-        return itemsTagDao.getTag(id)
-    }
+    suspend fun delete(id: Int)
 
     @WorkerThread
-    fun getAllTags(): LiveData<List<ItemTag>> {
-        return itemsTagDao.getAllTags()
-    }
+    fun getTag(id: Int): LiveData<ItemTag>
+
+    @WorkerThread
+    fun getAllTags(): LiveData<List<ItemTag>>
 }
