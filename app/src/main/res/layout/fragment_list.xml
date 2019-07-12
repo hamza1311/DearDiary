@@ -18,7 +18,7 @@
         tools:listitem="@layout/list_recycler_view_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/tagsList_fab"
+        android:id="@+id/newItem_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

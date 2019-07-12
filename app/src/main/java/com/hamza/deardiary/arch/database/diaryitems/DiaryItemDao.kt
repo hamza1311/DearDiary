@@ -24,7 +24,4 @@ interface DiaryItemDao {
 
     @Query("SELECT * FROM diary_item_table WHERE tag = :tagName ORDER BY time_created")
     fun getItemsWithSameTag(tagName: String): LiveData<List<DiaryItem>>
-
-    @Query("SELECT * FROM diary_item_table WHERE tag = :tagName ORDER BY time_created")
-    fun getItemsWithSameTagAsList(tagName: String): List<DiaryItem>
 }

@@ -80,6 +80,7 @@ class AddViewUpdateItemFragment : Fragment() {
             }
             R.id.action_details_menuItem -> {
                 if (currentId != 0) {
+                    saveOrUpdate()
                     findNavController().navigate(
                         AddViewUpdateItemFragmentDirections.actionToItemDetailsFragment(
                             currentId

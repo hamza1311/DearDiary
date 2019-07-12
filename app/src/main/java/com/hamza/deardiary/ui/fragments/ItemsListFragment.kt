@@ -45,7 +45,7 @@ class ItemsListFragment : Fragment() {
         }
 
 
-        tagsList_fab.setOnClickListener {
+        newItem_fab.setOnClickListener {
             startActivity(Intent(context, NewUpdateOrViewDiaryItemActivity::class.java).putExtra("id", 0))
         }
 
