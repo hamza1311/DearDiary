@@ -8,7 +8,7 @@ import com.hamza.deardiary.arch.models.ItemTag
 interface DiaryItemRepository {
 
     @WorkerThread
-    suspend fun addItem(item: DiaryItem)
+    suspend fun addItem(item: DiaryItem): Long
 
     @WorkerThread
     suspend fun update(item: DiaryItem)

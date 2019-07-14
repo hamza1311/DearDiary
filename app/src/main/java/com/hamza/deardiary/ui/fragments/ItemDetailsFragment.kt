@@ -1,6 +1,7 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,6 +52,8 @@ class ItemDetailsFragment : Fragment() {
                 itemDetails_tags_spinner.setSelection(
                     arrayAdapter.getPosition(it.tag)
                 )
+
+                itemDetails_time_textView.text = DiaryItem.formatTime(it.timeCreated)
             })
             itemDetails_tags_spinner.apply {
                 adapter = arrayAdapter

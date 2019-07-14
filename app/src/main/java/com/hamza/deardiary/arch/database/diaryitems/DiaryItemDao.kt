@@ -8,7 +8,7 @@ import com.hamza.deardiary.arch.models.DiaryItem
 interface DiaryItemDao {
 
     @Insert
-    suspend fun addItem(item: DiaryItem)
+    suspend fun addItem(item: DiaryItem): Long
 
     @Update
     suspend fun updateItem(item: DiaryItem)

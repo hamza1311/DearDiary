@@ -9,8 +9,8 @@ import com.hamza.deardiary.arch.models.ItemTag
 
 class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryItemRepository {
     @WorkerThread
-    override suspend fun addItem(item: DiaryItem) {
-        diaryItemDao.addItem(item)
+    override suspend fun addItem(item: DiaryItem): Long {
+        return diaryItemDao.addItem(item)
     }
 
     @WorkerThread

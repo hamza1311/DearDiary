@@ -23,15 +23,15 @@ class E2ETest {
 
 //        Create Item to set tag for
         onView(withId(R.id.newItem_fab)).perform(click())
-        onView(withId(R.id.newOrEditAct_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
-        onView(withId(R.id.newOrEditAct_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
 
         onView(isRoot()).perform(pressBack())
 
 //        Edit Item
         onView(withText("Title")).check(matches(isDisplayed())).perform(click())
-        onView(withId(R.id.newOrEditAct_title_editText)).perform(typeText(" Edited Tag"), closeSoftKeyboard())
-        onView(withId(R.id.newOrEditAct_body_editText)).perform(typeText(" Edited Tag"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_title_editText)).perform(typeText(" Edited Tag"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_body_editText)).perform(typeText(" Edited Tag"), closeSoftKeyboard())
 
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext<Context>())
         onView(withText("Details")).perform(click())
@@ -50,8 +50,8 @@ class E2ETest {
 
 //        Create item
         onView(withId(R.id.newItem_fab)).perform(click())
-        onView(withId(R.id.newOrEditAct_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
-        onView(withId(R.id.newOrEditAct_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
 
         onView(isRoot()).perform(pressBack())
 
@@ -67,15 +67,15 @@ class E2ETest {
 
 //        Create Item to edit
         onView(withId(R.id.newItem_fab)).perform(click())
-        onView(withId(R.id.newOrEditAct_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
-        onView(withId(R.id.newOrEditAct_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_title_editText)).perform(typeText("Title"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_body_editText)).perform(typeText("Text"), closeSoftKeyboard())
 
         onView(isRoot()).perform(pressBack())
 
 //        Edit Item
         onView(withText("Title")).check(matches(isDisplayed())).perform(click())
-        onView(withId(R.id.newOrEditAct_title_editText)).perform(typeText(" Edited"), closeSoftKeyboard())
-        onView(withId(R.id.newOrEditAct_body_editText)).perform(typeText(" Edited"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_title_editText)).perform(typeText(" Edited"), closeSoftKeyboard())
+        onView(withId(R.id.newOrEdit_body_editText)).perform(typeText(" Edited"), closeSoftKeyboard())
 
         onView(isRoot()).perform(pressBack())
 

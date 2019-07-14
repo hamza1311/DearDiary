@@ -1,6 +1,7 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -33,16 +34,15 @@ class AddViewUpdateItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         currentId = activity?.intent?.extras?.getInt("id") ?: 0
-//        viewModel = ViewModelProviders.of(this).get(DiaryItemViewModel::class.java)
         viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
 
         if (currentId != 0) {
             viewModel.get(currentId).observe(this, Observer {
                 currentItem = it
-                newOrEditAct_title_editText.setText(it.title)
-                newOrEditAct_body_editText.setText(it.text)
-                time_textView.text = DiaryItem.formatTime(it.timeCreated)
-                newOrEditAct_tags_textView.text = it.tag
+                newOrEdit_title_editText.setText(it.title)
+                newOrEdit_body_editText.setText(it.text)
+                /*time_textView.text = DiaryItem.formatTime(it.timeCreated)
+                newOrEditAct_tags_textView.text = it.tag*/
                 setTitleAndBody()
                 if (currentItem.isLocked) {
                     lockOrUnlockItem(false)
@@ -51,6 +51,10 @@ class AddViewUpdateItemFragment : Fragment() {
         } else {
             currentItem = DiaryItem(title = "title", text = "text", tag = "")
             setTitleAndBody()
+        }
+
+        newOrEdit_save_fab.setOnClickListener {
+            saveOrUpdate()
         }
     }
 
@@ -87,7 +91,7 @@ class AddViewUpdateItemFragment : Fragment() {
                         )
                     )
                 } else {
-//                    TODO: Add a save fab and make a toast saying save before checking details
+                    Toast.makeText(context, getString(R.string.save_before_details), Toast.LENGTH_SHORT).show()
                 }
                 true
             }
@@ -96,21 +100,22 @@ class AddViewUpdateItemFragment : Fragment() {
     }
 
     private fun lockOrUnlockItem(status: Boolean) {
-        newOrEditAct_title_editText.isEnabled = status
-        newOrEditAct_body_editText.isEnabled = status
-        newOrEditAct_tags_textView.isEnabled = status
+        newOrEdit_title_editText.isEnabled = status
+        newOrEdit_body_editText.isEnabled = status
     }
 
     private fun setTitleAndBody() {
-        currentItem.text = newOrEditAct_body_editText.text.toString()
-        currentItem.title = newOrEditAct_title_editText.text.toString()
+        currentItem.text = newOrEdit_body_editText.text.toString()
+        currentItem.title = newOrEdit_title_editText.text.toString()
     }
 
     private fun saveOrUpdate() {
         setTitleAndBody()
-        if (currentId == 0) {
+        if (currentId == 0 && !viewModel.getIsSaved()) {
             Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
-            viewModel.insert(currentItem)
+            currentId = viewModel.insert(currentItem).toInt().also {
+                viewModel.setIsSaved(true)
+            }
         } else {
             Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
             viewModel.update(currentItem)

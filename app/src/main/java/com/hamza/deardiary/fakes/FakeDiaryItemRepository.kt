@@ -2,7 +2,6 @@ package com.hamza.deardiary.fakes
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
@@ -11,10 +10,9 @@ class FakeDiaryItemRepository : DiaryItemRepository {
 
     var serviceData = LinkedHashMap<Int, DiaryItem>()
 
-    private var shouldReturnError = false
-
-    override suspend fun addItem(item: DiaryItem) {
+    override suspend fun addItem(item: DiaryItem): Long {
         serviceData[item.id] = item
+        return item.id.toLong()
     }
 
     override suspend fun update(item: DiaryItem) {

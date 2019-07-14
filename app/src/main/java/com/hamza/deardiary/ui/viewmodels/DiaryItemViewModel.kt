@@ -6,13 +6,17 @@ import androidx.lifecycle.viewModelScope
 import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewModel() {
     val allItems: LiveData<List<DiaryItem>> = repository.getAllItems()
+    private var isSaved: Boolean = false
 
-    fun insert(item: DiaryItem) = viewModelScope.launch {
-        repository.addItem(item)
+    fun insert(item: DiaryItem): Long = runBlocking {
+        val id = async { repository.addItem(item) }
+        withContext(Dispatchers.IO) {
+            return@withContext id.await()
+        }
     }
 
     fun update(item: DiaryItem) = viewModelScope.launch {
@@ -26,4 +30,11 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
     fun get(id: Int) = repository.getItem(id)
 
     fun getItemsByTag(tag: ItemTag) = repository.getItemsWithSameTag(tag)
+
+    fun getIsSaved() = isSaved
+
+    fun setIsSaved(value: Boolean): Boolean {
+        isSaved = value
+        return isSaved
+    }
 }

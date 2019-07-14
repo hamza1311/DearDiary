@@ -13,18 +13,21 @@ import org.junit.Test
 import org.hamcrest.core.Is.`is`
 import com.google.common.truth.Truth.assertThat
 import com.hamza.deardiary.arch.models.ItemTag
+import org.hamcrest.Matchers.equalTo
 import org.junit.Assert.assertThat
 import org.junit.Rule
 
 
 class DiaryItemViewModelTest {
-    lateinit var viewModel: DiaryItemViewModel
-    lateinit var repository: FakeDiaryItemRepository
+    private lateinit var viewModel: DiaryItemViewModel
+    private lateinit var repository: FakeDiaryItemRepository
 
-    @get:Rule var instantExecutorRule = InstantTaskExecutorRule()
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
     @ExperimentalCoroutinesApi
-    @get:Rule var mainCoroutineRule = MainCoroutineRule()
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     @Before
     fun setupViewModel() {
@@ -85,9 +88,10 @@ class DiaryItemViewModelTest {
         val item = DiaryItem(id = 5, title = "Title new", text = "Text new", tag = "some tag")
         assertThat(repository.serviceData.containsValue(item)).isFalse()
 
-        viewModel.insert(item)
+        val res = viewModel.insert(item)
 
         assertThat(repository.serviceData.containsValue(item)).isTrue()
+        assertThat(res.toInt(), equalTo(item.id))
     }
 
     @Test
