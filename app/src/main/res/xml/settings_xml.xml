@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreferenceCompat
-        app:key="password"
-        app:title="Enable Password"/>
+    <PreferenceCategory android:title="Password lock">
 
-    <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+        <SwitchPreferenceCompat
+            app:key="enablePasswordPreference"
+            app:title="Enable Password" />
+
+        <EditTextPreference
+            android:key="setPassword"
+            android:selectAllOnFocus="true"
+            android:title="Set/Change password" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Signature">
+
+        <SwitchPreferenceCompat
+            app:key="enableSignaturePreference"
+            app:title="Add 'Dear Diary' and sign off signature" />
+
+        <EditTextPreference
+            android:key="setSignature"
+            android:selectAllOnFocus="true"
+            android:title="Set sign-off signature" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
