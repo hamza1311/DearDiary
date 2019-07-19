@@ -2,7 +2,7 @@ package com.hamza.deardiary.fakes
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
 

@@ -1,4 +1,4 @@
-package com.hamza.deardiary.arch.database.diaryitems
+package com.hamza.deardiary.arch.repositories.diaryitem
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData

@@ -1,12 +1,12 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
@@ -17,6 +17,7 @@ class AddViewUpdateItemFragment : Fragment() {
     private var currentId: Int = 0
     private lateinit var viewModel: DiaryItemViewModel
     private lateinit var currentItem: DiaryItem
+    private val sharedPrefs by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,7 +114,11 @@ class AddViewUpdateItemFragment : Fragment() {
         setTitleAndBody()
         if (currentId == 0 && !viewModel.getIsSaved()) {
             Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
-            currentId = viewModel.insert(currentItem).toInt().also {
+            currentId = viewModel.insert(
+                currentItem,
+                sharedPrefs.getBoolean("enableSignaturePreference", false),
+                sharedPrefs.getString("setSignature", "") ?: ""
+            ).toInt().also {
                 viewModel.setIsSaved(true)
             }
         } else {

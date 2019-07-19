@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemDao
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagDao
+import com.hamza.deardiary.arch.database.daos.DiaryItemDao
+import com.hamza.deardiary.arch.database.daos.ItemsTagDao
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
 

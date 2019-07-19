@@ -10,9 +10,10 @@
     <string name="tag_icon">Tag icon</string>
     <string name="detail">Details</string>
     <string name="lock">Lock/Unlock this item</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="preference_file_name">prefs</string>
     <string name="save_before_details">Please save before getting details</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="password_enabled">Password enabled</string>
+    <string name="incorrect_password">Incorrect password</string>
 </resources>

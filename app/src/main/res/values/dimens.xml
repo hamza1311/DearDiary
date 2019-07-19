@@ -5,4 +5,5 @@
     <dimen name="button_corner_radius">10dp</dimen>
     <dimen name="margins">8dp</dimen>
     <dimen name="elevation">10dp</dimen>
+    <dimen name="delete_ic_size">24dp</dimen>
 </resources>

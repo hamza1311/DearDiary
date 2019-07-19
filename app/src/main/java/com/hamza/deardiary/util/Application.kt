@@ -1,11 +1,11 @@
-package com.hamza.deardiary
+package com.hamza.deardiary.util
 
 import android.app.Application
 import com.hamza.deardiary.arch.database.DiaryDatabase
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagRepository
-import com.hamza.deardiary.arch.repositories.MainDiaryItemRepository
-import com.hamza.deardiary.arch.repositories.MainItemTagRepository
+import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.repositories.diaryitem.MainDiaryItemRepository
+import com.hamza.deardiary.arch.repositories.itemstag.MainItemTagRepository
 
 class App : Application() {
     val diaryItemRepository: DiaryItemRepository

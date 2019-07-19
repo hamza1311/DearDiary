@@ -53,17 +53,7 @@ class NewTagFragment : Fragment() {
             it.findNavController().popBackStack()
         }
 
-        view.apply {
-            isFocusableInTouchMode = true
-            requestFocus()
-            setOnKeyListener { v, keyCode, _ ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    v.findNavController().popBackStack()
-                    return@setOnKeyListener true
-                }
-                return@setOnKeyListener false
-            }
-        }
+
     }
 
     companion object {

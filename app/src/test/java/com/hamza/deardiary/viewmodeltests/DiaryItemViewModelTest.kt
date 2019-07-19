@@ -88,7 +88,7 @@ class DiaryItemViewModelTest {
         val item = DiaryItem(id = 5, title = "Title new", text = "Text new", tag = "some tag")
         assertThat(repository.serviceData.containsValue(item)).isFalse()
 
-        val res = viewModel.insert(item)
+        val res = viewModel.insert(item, false, "")
 
         assertThat(repository.serviceData.containsValue(item)).isTrue()
         assertThat(res.toInt(), equalTo(item.id))

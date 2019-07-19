@@ -1,13 +1,13 @@
-package com.hamza.deardiary.arch.repositories
+package com.hamza.deardiary.arch.repositories.diaryitem
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemDao
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
+import com.hamza.deardiary.arch.database.daos.DiaryItemDao
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
 
-class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryItemRepository {
+class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) :
+    DiaryItemRepository {
     @WorkerThread
     override suspend fun addItem(item: DiaryItem): Long {
         return diaryItemDao.addItem(item)

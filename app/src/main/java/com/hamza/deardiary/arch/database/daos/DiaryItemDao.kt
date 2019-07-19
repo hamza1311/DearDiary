@@ -1,4 +1,4 @@
-package com.hamza.deardiary.arch.database.diaryitems
+package com.hamza.deardiary.arch.database.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

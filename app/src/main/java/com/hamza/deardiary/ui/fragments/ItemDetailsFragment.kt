@@ -1,7 +1,6 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

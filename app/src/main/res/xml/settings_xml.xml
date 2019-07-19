@@ -9,6 +9,7 @@
             app:title="Enable Password" />
 
         <EditTextPreference
+            android:inputType="number"
             android:key="setPassword"
             android:selectAllOnFocus="true"
             android:title="Set/Change password" />

@@ -4,8 +4,8 @@ package com.hamza.deardiary.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hamza.deardiary.arch.database.diaryitems.DiaryItemRepository
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
 
 class DiaryItemViewModelFactory(private val repository: DiaryItemRepository) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = with(modelClass) {

@@ -1,9 +1,6 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -17,6 +14,7 @@ import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
+import android.graphics.*
 import kotlin.math.roundToInt
 
 class ItemsListFragment : Fragment() {
@@ -44,17 +42,15 @@ class ItemsListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-
         newItem_fab.setOnClickListener {
             startActivity(Intent(context, NewUpdateOrViewDiaryItemActivity::class.java).putExtra("id", 0))
         }
-
 
         viewModel.allItems.observe(this, Observer { items ->
             listAdapter.setItems(items)
         })
 
-        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -80,33 +76,19 @@ class ItemsListFragment : Fragment() {
                     R.drawable.ic_delete_black_24dp,
                     null
                 )
-
                 c.clipRect(
                     0f, viewHolder.itemView.top.toFloat(),
                     dX, viewHolder.itemView.bottom.toFloat()
                 )
-                if (dX < viewHolder.itemView.layoutParams.width / 3)
-                    c.drawColor(Color.GRAY)
-                else
-                    c.drawColor(Color.RED)
+                c.drawColor(Color.RED) // TODO: Replace `Color.RED` with a @color res
 
-                val textMargin = resources.getDimension(R.dimen.list_margin).roundToInt()
-
-                trashBinIcon.bounds = Rect(
-                    textMargin,
-                    viewHolder.itemView.top,
-                    (130).toInt(), //TODO: Fix it. IDK what to do here
-                    viewHolder.itemView.bottom
-                )
-
+                val buttonWidth = resources.getDimension(R.dimen.delete_ic_size).roundToInt()
+                val itemView = viewHolder.itemView
+                trashBinIcon.bounds =
+                    Rect(itemView.left, itemView.top, itemView.left * (buttonWidth / 2), itemView.bottom)
                 trashBinIcon.draw(c)
-
-
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
-        }
-
-        val myHelper = ItemTouchHelper(callback)
-        myHelper.attachToRecyclerView(list_recyclerView)
+        }).attachToRecyclerView(list_recyclerView)
     }
 }

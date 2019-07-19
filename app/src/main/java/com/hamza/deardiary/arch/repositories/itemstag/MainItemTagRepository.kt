@@ -1,12 +1,12 @@
-package com.hamza.deardiary.arch.repositories
+package com.hamza.deardiary.arch.repositories.itemstag
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagDao
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.database.daos.ItemsTagDao
 import com.hamza.deardiary.arch.models.ItemTag
 
-class MainItemTagRepository(private val itemsTagDao: ItemsTagDao) : ItemsTagRepository {
+class MainItemTagRepository(private val itemsTagDao: ItemsTagDao) :
+    ItemsTagRepository {
     @WorkerThread
     override suspend fun addTag(item: ItemTag) {
         itemsTagDao.addTag(item)

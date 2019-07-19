@@ -3,7 +3,7 @@ package com.hamza.deardiary.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hamza.deardiary.arch.database.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
 import com.hamza.deardiary.arch.models.ItemTag
 import kotlinx.coroutines.launch
 
