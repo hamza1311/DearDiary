@@ -15,6 +15,8 @@ import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
 import android.graphics.*
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlin.math.roundToInt
 
 class ItemsListFragment : Fragment() {
@@ -62,6 +64,7 @@ class ItemsListFragment : Fragment() {
                 listAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
 
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onChildDraw(
                 c: Canvas,
                 recyclerView: RecyclerView,
@@ -80,7 +83,8 @@ class ItemsListFragment : Fragment() {
                     0f, viewHolder.itemView.top.toFloat(),
                     dX, viewHolder.itemView.bottom.toFloat()
                 )
-                c.drawColor(Color.RED) // TODO: Replace `Color.RED` with a @color res
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M)
+                    c.drawColor(resources.getColor(R.color.colorSwipeToDeleteBg, null))
 
                 val buttonWidth = resources.getDimension(R.dimen.delete_ic_size).roundToInt()
                 val itemView = viewHolder.itemView

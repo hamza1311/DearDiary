@@ -1,7 +1,9 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
+import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
 import com.hamza.deardiary.R
 import com.hamza.deardiary.util.showSnackbar
 
@@ -9,32 +11,34 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings_xml, rootKey)
 
-        val setPasswordPref = findPreference("setPassword")
+        val setPasswordPref = findPreference<EditTextPreference>("setPassword")
 
-        findPreference("enablePasswordPreference").apply {
+        findPreference<SwitchPreferenceCompat>("enablePasswordPreference")?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 showSnackbar(getString(R.string.password_enabled))
-                setPasswordPref.isEnabled = newValue as Boolean
+                setPasswordPref?.isEnabled = newValue as Boolean
                 true
             }
         }
 
-        setPasswordPref.apply {
+        setPasswordPref?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 showSnackbar(newValue.toString())
                 true
             }
         }
 
-        findPreference("enableSignaturePreference").apply {
+        val setSignaturePreference = findPreference<EditTextPreference>("setSignature")
+
+        findPreference<SwitchPreferenceCompat>("enableSignaturePreference")?.apply {
             setOnPreferenceChangeListener { _, newValue ->
-                showSnackbar(getString(R.string.password_enabled))
-                setPasswordPref.isEnabled = newValue as Boolean
+                showSnackbar(getString(R.string.signature_enabled))
+                setSignaturePreference?.isEnabled = newValue as Boolean
                 true
             }
         }
 
-        setPasswordPref.apply {
+        setSignaturePreference?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 showSnackbar(newValue.toString())
                 true

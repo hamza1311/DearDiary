@@ -1,7 +1,6 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,7 @@ import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_tag_items.*
 
 class TagItemsFragment : Fragment() {
@@ -61,16 +61,6 @@ class TagItemsFragment : Fragment() {
             it.findNavController().popBackStack()
         }
 
-        view.apply {
-            isFocusableInTouchMode = true
-            requestFocus()
-            setOnKeyListener { v, keyCode, _ ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    v.findNavController().popBackStack()
-                    return@setOnKeyListener true
-                }
-                return@setOnKeyListener false
-            }
-        }
+        view.setBackPressToPopNavigationBackStackFragment()
     }
 }

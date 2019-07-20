@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
                 val password = login_password_editText.text.toString()
                 if (prefs.getString("setPassword", "") == password && password.isNotBlank()) {
                     findNavController().apply {
-                        navigate(R.id.action_loginFragment_to_mainFragment)
+                        navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
                     }
                 } else {
                     showSnackbar(getString(R.string.incorrect_password))
@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
             }
         } else {
             findNavController().apply {
-                navigate(R.id.action_loginFragment_to_mainFragment)
+                navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
             }
         }
     }

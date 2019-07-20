@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.activities.SettingsActivity
 import com.hamza.deardiary.ui.adapters.PagerAdapter
@@ -30,18 +31,6 @@ class MainFragment : Fragment() {
         val pagerAdapter = PagerAdapter(fragmentManager!!)
         pager.adapter = pagerAdapter
         tab_layout.setupWithViewPager(pager)
-
-        view.apply {
-            isFocusableInTouchMode = true
-            requestFocus()
-            setOnKeyListener { _, keyCode, _ ->
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    activity?.finish()
-                    return@setOnKeyListener true
-                }
-                return@setOnKeyListener false
-            }
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

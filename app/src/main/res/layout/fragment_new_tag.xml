@@ -6,20 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.NewTagFragment">
 
-    <EditText
-        android:id="@+id/newTag_name_editText"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newTag_name_editTextLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margins"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="@dimen/margins"
+        android:layout_marginBottom="@dimen/margins"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/tag_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no"
-        tools:targetApi="o" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newTag_name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tag_name"
+            android:inputType="textAutoCorrect|textPersonName|textCapSentences|textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
         android:id="@+id/newTag_colors_spinner"
@@ -29,15 +36,15 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTag_name_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/newTag_name_editTextLayout" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/newTag_save_button"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margins"
         android:layout_marginTop="32dp"
-        android:elevation="@dimen/elevation"
         android:background="@drawable/button_bg"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"

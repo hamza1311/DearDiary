@@ -16,4 +16,5 @@
     <string name="password">Password</string>
     <string name="password_enabled">Password enabled</string>
     <string name="incorrect_password">Incorrect password</string>
+    <string name="signature_enabled">Signature enabled</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.ItemTag
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
 import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_new_tag.*
 
 class NewTagFragment : Fragment() {
@@ -53,7 +53,7 @@ class NewTagFragment : Fragment() {
             it.findNavController().popBackStack()
         }
 
-
+        view.setBackPressToPopNavigationBackStackFragment()
     }
 
     companion object {
