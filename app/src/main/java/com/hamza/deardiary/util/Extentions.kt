@@ -23,10 +23,14 @@ fun <T : ViewModel> Fragment.obtainItemTagViewModel(viewModelClass: Class<T>): T
 
 fun Fragment.showSnackbar(text: String) {
     this.activity?.run {
-        Snackbar.make(this.findViewById<View>(android.R.id.content), text, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(this.findViewById(android.R.id.content), text, Snackbar.LENGTH_SHORT).show()
     }
 }
 
+/**
+ * Override the back pressed event and make it pop back in navigation stack.
+ * This is used in situation where the back event won't back out of the fragment properly
+ */
 fun View.setBackPressToPopNavigationBackStackFragment() {
     this.apply {
         isFocusableInTouchMode = true

@@ -1,12 +1,12 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.hamza.deardiary.R
@@ -17,7 +17,6 @@ import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import com.hamza.deardiary.util.obtainItemTagViewModel
 import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_item_details.*
-
 
 class ItemDetailsFragment : Fragment() {
     private lateinit var itemTagViewModel: ItemsTagViewModel
@@ -40,20 +39,28 @@ class ItemDetailsFragment : Fragment() {
         itemTagViewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
         diaryItemViewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
 
+        // Get all the tags
         itemTagViewModel.allItems.observe(this, Observer { list ->
+            // Create a new list with the tag names
             val tagsList = mutableListOf<String>()
             list.forEach { tagsList.add(it.tagName) }
+            // Set up the ArrayAdapter to display the tags
             val arrayAdapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, tagsList)
 
+            // Get the item whose details we are viewing
             diaryItemViewModel.get(id).observe(this@ItemDetailsFragment, Observer {
                 currentItem = it
+                // Set the tag of the item on the spinner
                 itemDetails_tags_spinner.setSelection(
                     arrayAdapter.getPosition(it.tag)
                 )
 
+                // show the time created
                 itemDetails_time_textView.text = DiaryItem.formatTime(it.timeCreated)
             })
+
             itemDetails_tags_spinner.apply {
+                // Setup the spinner
                 adapter = arrayAdapter
                 onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(parent: AdapterView<*>?) {}

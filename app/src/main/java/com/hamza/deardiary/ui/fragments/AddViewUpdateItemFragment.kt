@@ -2,8 +2,8 @@ package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
@@ -13,6 +13,11 @@ import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_add_view_update_item.*
 
+/**
+ * Fragment for creating, editing and viewing items
+ * @property[currentId] the id of current item. 0 means new item
+ * @property[currentItem] the item being edited or created
+ */
 class AddViewUpdateItemFragment : Fragment() {
     private var currentId: Int = 0
     private lateinit var viewModel: DiaryItemViewModel
@@ -34,49 +39,59 @@ class AddViewUpdateItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // The id passed is 0 for a new item
         currentId = activity?.intent?.extras?.getInt("id") ?: 0
         viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
 
+        // Check if a new item is supposed to be created or an existing item is supposed to be edited
         if (currentId != 0) {
+            // Now we know that an existing element is to be edited.
+            // We ask the view model to give us the item for the id passed
             viewModel.get(currentId).observe(this, Observer {
                 currentItem = it
                 newOrEdit_title_editText.setText(it.title)
                 newOrEdit_body_editText.setText(it.text)
-                /*time_textView.text = DiaryItem.formatTime(it.timeCreated)
-                newOrEditAct_tags_textView.text = it.tag*/
-                setTitleAndBody()
                 if (currentItem.isLocked) {
                     lockOrUnlockItem(false)
                 }
             })
         } else {
+            // Here a new is created. This creates a new item and stores it in [currentItem]
             currentItem = DiaryItem(title = "title", text = "text", tag = "")
-            setTitleAndBody()
+            setTitleAndBodyOnObject()
         }
 
         newOrEdit_save_fab.setOnClickListener {
+            // Sets an onClickListener for the save fab to execute the save command
             saveOrUpdate()
         }
     }
 
     override fun onPause() {
         super.onPause()
+        // The user has either backed out or left the app.
+        // So we save or update the item
         saveOrUpdate()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflates the menu layout and show the menu
         inflater.inflate(R.menu.menu_new_update_or_view, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle click for the menu items
         return when (item.itemId) {
             R.id.action_lockItem_menuItem -> {
+                // Check if the item is locked
                 if (!currentItem.isLocked) {
+                    // The item is not locked so we lock it
                     currentItem.isLocked = true
                     viewModel.update(currentItem)
                     lockOrUnlockItem(false)
                 } else {
+                    // The item is locked so we unlock it
                     currentItem.isLocked = false
                     viewModel.update(currentItem)
                     lockOrUnlockItem(true)
@@ -84,7 +99,9 @@ class AddViewUpdateItemFragment : Fragment() {
                 true
             }
             R.id.action_details_menuItem -> {
+                // Check that an existing item is being edited
                 if (currentId != 0) {
+                    // Now that we know an existing item is being edited, we navigate to ItemDetailsFragment and pass the id
                     saveOrUpdate()
                     findNavController().navigate(
                         AddViewUpdateItemFragmentDirections.actionToItemDetailsFragment(
@@ -92,6 +109,8 @@ class AddViewUpdateItemFragment : Fragment() {
                         )
                     )
                 } else {
+                    // This is a new item
+                    // Prompt the user to save it before checking the details
                     Toast.makeText(context, getString(R.string.save_before_details), Toast.LENGTH_SHORT).show()
                 }
                 true
@@ -105,15 +124,16 @@ class AddViewUpdateItemFragment : Fragment() {
         newOrEdit_body_editText.isEnabled = status
     }
 
-    private fun setTitleAndBody() {
+    private fun setTitleAndBodyOnObject() {
         currentItem.text = newOrEdit_body_editText.text.toString()
         currentItem.title = newOrEdit_title_editText.text.toString()
     }
 
     private fun saveOrUpdate() {
-        setTitleAndBody()
+        setTitleAndBodyOnObject()
+        // Check that its a new item
         if (currentId == 0 && !viewModel.getIsSaved()) {
-            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
+            // This is a new item so we save it
             currentId = viewModel.insert(
                 currentItem,
                 sharedPrefs.getBoolean("enableSignaturePreference", false),
@@ -121,9 +141,11 @@ class AddViewUpdateItemFragment : Fragment() {
             ).toInt().also {
                 viewModel.setIsSaved(true)
             }
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+            // An existing item is being edited so we update it
             viewModel.update(currentItem)
+            Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
         }
     }
 }

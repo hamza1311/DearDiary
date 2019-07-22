@@ -1,8 +1,14 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,11 +20,11 @@ import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
-import android.graphics.*
-import android.os.Build
-import androidx.annotation.RequiresApi
 import kotlin.math.roundToInt
 
+/**
+ * Fragment for showing all the items. This is one of the 2 fragments shown in viewpager in [MainFragment]
+ */
 class ItemsListFragment : Fragment() {
     private lateinit var viewModel: DiaryItemViewModel
     private lateinit var listAdapter: DiaryItemListAdapter
@@ -38,6 +44,7 @@ class ItemsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Setup recycler view
         listAdapter = DiaryItemListAdapter(context = context!!)
         list_recyclerView.apply {
             adapter = listAdapter
@@ -52,6 +59,8 @@ class ItemsListFragment : Fragment() {
             listAdapter.setItems(items)
         })
 
+        // Set the ItemTouchHelper to handle swipe event on recycler view.
+        // Swipe right is delete
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -75,6 +84,7 @@ class ItemsListFragment : Fragment() {
                 isCurrentlyActive: Boolean
             ) {
 
+                // Get the trashbin drawable
                 val trashBinIcon = resources.getDrawable(
                     R.drawable.ic_delete_black_24dp,
                     null
@@ -83,8 +93,8 @@ class ItemsListFragment : Fragment() {
                     0f, viewHolder.itemView.top.toFloat(),
                     dX, viewHolder.itemView.bottom.toFloat()
                 )
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M)
-                    c.drawColor(resources.getColor(R.color.colorSwipeToDeleteBg, null))
+                // Get color resource and draw it
+                c.drawColor(resources.getColor(R.color.colorSwipeToDeleteBg, null))
 
                 val buttonWidth = resources.getDimension(R.dimen.delete_ic_size).roundToInt()
                 val itemView = viewHolder.itemView

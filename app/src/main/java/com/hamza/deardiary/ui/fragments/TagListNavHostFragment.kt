@@ -1,15 +1,15 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-
+import androidx.fragment.app.Fragment
 import com.hamza.deardiary.R
 
+/**
+ * Fragment for holding NavHostFragment for Tags list. This is the 2nd fragment displayed in viewpager in [MainFragment]
+ */
 class TagListNavHostFragment : Fragment() {
 
     override fun onCreateView(
