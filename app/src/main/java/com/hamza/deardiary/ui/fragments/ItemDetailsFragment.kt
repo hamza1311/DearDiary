@@ -63,7 +63,12 @@ class ItemDetailsFragment : Fragment() {
                 // Setup the spinner
                 adapter = arrayAdapter
                 onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        if (tagsList.size == 1) {
+                            currentItem.tag = tagsList[0]
+                            diaryItemViewModel.update(currentItem)
+                        }
+                    }
 
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         currentItem.tag = tagsList[position]

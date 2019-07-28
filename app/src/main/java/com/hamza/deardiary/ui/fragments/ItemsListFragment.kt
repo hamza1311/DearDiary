@@ -84,7 +84,7 @@ class ItemsListFragment : Fragment() {
                 isCurrentlyActive: Boolean
             ) {
 
-                // Get the trashbin drawable
+                // Get the trash bin drawable
                 val trashBinIcon = resources.getDrawable(
                     R.drawable.ic_delete_black_24dp,
                     null
@@ -99,7 +99,7 @@ class ItemsListFragment : Fragment() {
                 val buttonWidth = resources.getDimension(R.dimen.delete_ic_size).roundToInt()
                 val itemView = viewHolder.itemView
                 trashBinIcon.bounds =
-                    Rect(itemView.left, itemView.top, itemView.left * (buttonWidth / 2), itemView.bottom)
+                    Rect(itemView.left, itemView.top, itemView.left * (buttonWidth / 3), itemView.bottom)
                 trashBinIcon.draw(c)
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
