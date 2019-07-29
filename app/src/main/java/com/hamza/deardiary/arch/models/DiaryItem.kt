@@ -7,7 +7,7 @@ import java.util.*
 
 /**
  * Modal class and database entity for DiaryItem
- * @property[tag] tag for the item. This is stored as string without any relation to an ItemTag in itself.
+ * @property[tag] Tag for the item. This is stored as string without any relation to an ItemTag in itself.
  * @property[isLocked] Tells if the item can be edited without unlocking it
  * @property[isHidden] Tells if the item is hidden. This functionality is not implemented yet
  */

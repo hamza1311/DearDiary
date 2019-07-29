@@ -14,19 +14,19 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
 
     fun insert(item: DiaryItem, shouldAddDearDiarySignOffSignature: Boolean, signOffSignature: String): Long =
         runBlocking {
-            //            The id is returned when the data is saved to the database.
-//            Here we save the item in `async {}` block which returns the id as `Deferred<Long>`
+            //  The id is returned when the data is saved to the database.
+            //  Here we save the item in `async {}` block which returns the id as `Deferred<Long>`
             val id = async {
-                //                 Check if the setting for adding the signature is enabled
+                // Check if the setting for adding the signature is enabled
                 if (shouldAddDearDiarySignOffSignature) {
-//                    If it is enabled, add the signature and save the item
+                    // If it is enabled, add the signature and save the item
                     repository.addItem(addDearDiarySignOffSignature(item, signOffSignature))
                 } else {
-//                    Otherwise, save it as is returned
+                    // Otherwise, save it as is returned
                     repository.addItem(item)
                 }
             }
-//            The as in `Deferred<Long>` is `await`ed on a background thread and
+            // The as in `Deferred<Long>` is `await`ed on a background thread and
             withContext(Dispatchers.IO) {
                 return@withContext id.await()
             }

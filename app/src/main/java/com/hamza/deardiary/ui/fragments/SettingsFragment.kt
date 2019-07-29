@@ -15,15 +15,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         findPreference<SwitchPreferenceCompat>("enablePasswordPreference")?.apply {
             setOnPreferenceChangeListener { _, newValue ->
-                showSnackbar(getString(R.string.password_enabled))
-                setPasswordPref?.isEnabled = newValue as Boolean
+                showSnackbar(getString(if (newValue as Boolean) R.string.password_enabled else R.string.password_disabled))
+                setPasswordPref?.isEnabled = newValue
                 true
             }
         }
 
         setPasswordPref?.apply {
-            setOnPreferenceChangeListener { _, newValue ->
-                showSnackbar(newValue.toString())
+            setOnPreferenceChangeListener { _, _ ->
+                showSnackbar(getString(R.string.password_set))
                 true
             }
         }
@@ -32,15 +32,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         findPreference<SwitchPreferenceCompat>("enableSignaturePreference")?.apply {
             setOnPreferenceChangeListener { _, newValue ->
-                showSnackbar(getString(R.string.signature_enabled))
-                setSignaturePreference?.isEnabled = newValue as Boolean
+                showSnackbar(getString(if (newValue as Boolean) R.string.signature_enabled else R.string.signature_disabled))
+                setSignaturePreference?.isEnabled = newValue
                 true
             }
         }
 
         setSignaturePreference?.apply {
-            setOnPreferenceChangeListener { _, newValue ->
-                showSnackbar(newValue.toString())
+            setOnPreferenceChangeListener { _, _ ->
+                showSnackbar(getString(R.string.signature_set))
                 true
             }
         }

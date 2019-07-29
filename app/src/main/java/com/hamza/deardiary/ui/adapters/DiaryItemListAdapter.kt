@@ -34,7 +34,7 @@ class DiaryItemListAdapter(val context: Context) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(diaryItem: DiaryItem) {
             itemView.list_title_textView.text = diaryItem.title
-            itemView.list_body_textView.text = diaryItem.text.replace("\n\n", "...")
+            itemView.list_body_textView.text = diaryItem.text.replace("\n\n", " ")
             itemView.list_tag_textView.text = diaryItem.tag
 
             itemView.setOnClickListener {
