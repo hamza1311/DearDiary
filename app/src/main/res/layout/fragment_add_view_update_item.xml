@@ -1,65 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AddViewUpdateItemFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newOrEdit_title_editTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <ScrollView
+        style="@style/ScrollViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margins"
-        android:layout_marginTop="@dimen/margins"
-        android:layout_marginEnd="@dimen/margins"
-        app:boxBackgroundMode="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newOrEdit_title_editText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/title"
-            android:inputType="textAutoCorrect|textPersonName|textCapSentences|textAutoComplete" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newOrEdit_body_editTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/margins"
-        app:boxBackgroundMode="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newOrEdit_title_editTextLayout">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newOrEdit_title_editTextLayout"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newOrEdit_body_editText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start|top"
-            android:hint="@string/body"
-            android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textPersonName|textCapSentences|textAutoComplete"
-            android:singleLine="false" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newOrEdit_title_editText"
+                    style="@style/TitleTextInputEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newOrEdit_body_editTextLayout"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/newOrEdit_body_editText"
+                    style="@style/BodyTextInputEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/body" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/newOrEdit_save_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"
-        android:focusable="true"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:src="@drawable/ic_check_black_24dp"
-        app:layout_anchorGravity="bottom|right"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        style="@style/FabStyle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_check_black_24dp" />
+</RelativeLayout>

@@ -13,4 +13,37 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="ScrollViewStyle">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_margin">@dimen/margins</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundMode">none</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="TitleTextInputEditTextStyle">
+        <item name="android:inputType">textAutoCorrect|textPersonName|textCapSentences|textAutoComplete</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="BodyTextInputEditTextStyle">
+        <item name="android:inputType">
+            textLongMessage|textAutoCorrect|textMultiLine|textPersonName|textCapSentences|textAutoComplete
+        </item>
+        <item name="android:singleLine">false</item>
+        <item name="android:gravity">start|top</item>
+    </style>
+
+    <style name="FabStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_anchorGravity">bottom|right</item>
+    </style>
 </resources>
