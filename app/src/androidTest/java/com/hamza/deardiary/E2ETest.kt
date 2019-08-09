@@ -16,6 +16,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class E2ETest {
 
+    /**
+     * Test for setting the tag on the item.
+     * It creates the item, creates a tag, edits the item and sets the tag on it.
+     * This must be run before any other test and there must not be any other items displayed
+     * because then there will be multiple `list_tag_textView`s and espresso doesn't know which one to look for
+     */
     @Test
     fun setTag() {
 //        Launch activity
