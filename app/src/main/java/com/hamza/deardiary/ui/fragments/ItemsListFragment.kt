@@ -1,14 +1,8 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Rect
-import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,7 +14,6 @@ import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlin.math.roundToInt
 
 /**
  * Fragment for showing all the items. This is one of the 2 fragments shown in viewpager in [MainFragment]
@@ -39,6 +32,7 @@ class ItemsListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
     }
 
@@ -69,40 +63,46 @@ class ItemsListFragment : Fragment() {
             ): Boolean = false
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                viewModel.delete(listAdapter.list[viewHolder.adapterPosition].id)
+                viewModel.hideItem(listAdapter.list[viewHolder.adapterPosition])
                 listAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
-
-            @RequiresApi(Build.VERSION_CODES.M)
-            override fun onChildDraw(
-                c: Canvas,
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                dX: Float,
-                dY: Float,
-                actionState: Int,
-                isCurrentlyActive: Boolean
-            ) {
-
-                // Get the trash bin drawable
-                val trashBinIcon = resources.getDrawable(
-                    R.drawable.ic_delete_black_24dp,
-                    null
-                )
-                c.clipRect(
-                    0f, viewHolder.itemView.top.toFloat(),
-                    dX, viewHolder.itemView.bottom.toFloat()
-                )
-                // Get color resource and draw it
-                c.drawColor(resources.getColor(R.color.colorSwipeToDeleteBg, null))
-
-                val buttonWidth = resources.getDimension(R.dimen.delete_ic_size).roundToInt()
-                val itemView = viewHolder.itemView
-                trashBinIcon.bounds =
-                    Rect(itemView.left, itemView.top, itemView.left * (buttonWidth / 3), itemView.bottom)
-                trashBinIcon.draw(c)
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-            }
         }).attachToRecyclerView(list_recyclerView)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflates the menu layout and show the menu
+        inflater.inflate(R.menu.menu_items_list, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuItemsList_all -> {
+                removeObservers()
+                viewModel.allItems.observe(this, Observer { items ->
+                    listAdapter.setItems(items)
+                })
+            }
+            R.id.menuItemsList_hidden -> {
+                removeObservers()
+                viewModel.getHiddenItems().observe(this, Observer { items ->
+                    listAdapter.setItems(items)
+                })
+            }
+            R.id.menuItemsList_unhidden -> {
+                removeObservers()
+                viewModel.getUnhiddenItems().observe(this, Observer { items ->
+                    listAdapter.setItems(items)
+                })
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun removeObservers() {
+        viewModel.allItems.removeObservers(this)
+        viewModel.getHiddenItems().removeObservers(this)
+        viewModel.getUnhiddenItems().removeObservers(this)
     }
 }

@@ -20,4 +20,9 @@
     <string name="signature_disabled">Signature disabled</string>
     <string name="password_set">Password Set</string>
     <string name="signature_set">Signature Set</string>
+    <string name="sort_by">Sort by</string>
+    <string name="hidden">Hidden</string>
+    <string name="unhidden">Unhidden</string>
+    <string name="all">All</string>
+    <string name="hide_unhide_item">Hide/un-hide this item</string>
 </resources>

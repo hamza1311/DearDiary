@@ -51,6 +51,22 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
         return isSaved
     }
 
+    fun hideOrUnhideAndReturnItem(item: DiaryItem): DiaryItem {
+        item.isHidden = !item.isHidden
+        update(item)
+        return item
+    }
+
+    fun lockOrUnlockAndReturnItem(item: DiaryItem): DiaryItem {
+        item.isLocked = !item.isLocked
+        update(item)
+        return item
+    }
+
+    fun getUnhiddenItems() = repository.getAllUnHiddenItems()
+
+    fun getHiddenItems() = repository.getAllHiddenItems()
+
     private fun addDearDiarySignOffSignature(item: DiaryItem, signOffSignature: String): DiaryItem {
         val out = "Dear Diary,\n\n${item.text}\n\n$signOffSignature"
         return DiaryItem(
@@ -62,5 +78,10 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
             isHidden = item.isHidden,
             isLocked = item.isLocked
         )
+    }
+
+    fun hideItem(item: DiaryItem) {
+        item.isHidden = true
+        update(item)
     }
 }

@@ -74,4 +74,24 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
     override fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>> {
         return diaryItemDao.getItemsWithSameTag(tag.tagName)
     }
+
+    /**
+     * Tells DAO to get all hidden items
+     * Must run on a background thread
+     * @return LiveData of `List` of all hidden items
+     */
+    @WorkerThread
+    override fun getAllHiddenItems(): LiveData<List<DiaryItem>> {
+        return diaryItemDao.getAllItemsByHiddenStatus(true)
+    }
+
+    /**
+     * Tells DAO to get all unhidden items
+     * Must run on a background thread
+     * @return LiveData of `List` of all unhidden items
+     */
+    @WorkerThread
+    override fun getAllUnHiddenItems(): LiveData<List<DiaryItem>> {
+        return diaryItemDao.getAllItemsByHiddenStatus(false)
+    }
 }

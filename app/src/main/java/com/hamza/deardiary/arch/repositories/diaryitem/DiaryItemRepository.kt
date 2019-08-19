@@ -60,4 +60,20 @@ interface DiaryItemRepository {
      */
     @WorkerThread
     fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>>
+
+    /**
+     * Gets all hidden items
+     * Must run on a background thread
+     * @return LiveData of `List` of all hidden items
+     */
+    @WorkerThread
+    fun getAllHiddenItems(): LiveData<List<DiaryItem>>
+
+    /**
+     * Gets all unhidden items
+     * Must run on a background thread
+     * @return LiveData of `List` of all unhidden items
+     */
+    @WorkerThread
+    fun getAllUnHiddenItems(): LiveData<List<DiaryItem>>
 }

@@ -11,4 +11,7 @@
     <item
         android:id="@+id/action_details_menuItem"
         android:title="@string/detail" />
+    <item
+        android:id="@+id/action_hideItem_menuItem"
+        android:title="@string/hide_unhide_item" />
 </menu>

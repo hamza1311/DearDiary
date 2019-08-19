@@ -52,7 +52,7 @@ class AddViewUpdateItemFragment : Fragment() {
                 newOrEdit_title_editText.setText(it.title)
                 newOrEdit_body_editText.setText(it.text)
                 if (currentItem.isLocked) {
-                    lockOrUnlockItem(false)
+                    updateUIforLockAndUnlockItem(false)
                 }
             })
         } else {
@@ -84,18 +84,8 @@ class AddViewUpdateItemFragment : Fragment() {
         // Handle click for the menu items
         return when (item.itemId) {
             R.id.action_lockItem_menuItem -> {
-                // Check if the item is locked
-                if (!currentItem.isLocked) {
-                    // The item is not locked so we lock it
-                    currentItem.isLocked = true
-                    viewModel.update(currentItem)
-                    lockOrUnlockItem(false)
-                } else {
-                    // The item is locked so we unlock it
-                    currentItem.isLocked = false
-                    viewModel.update(currentItem)
-                    lockOrUnlockItem(true)
-                }
+                val newItem = viewModel.lockOrUnlockAndReturnItem(currentItem)
+                updateUIforLockAndUnlockItem(!newItem.isLocked)
                 true
             }
             R.id.action_details_menuItem -> {
@@ -115,11 +105,16 @@ class AddViewUpdateItemFragment : Fragment() {
                 }
                 true
             }
+            R.id.action_hideItem_menuItem -> {
+                val newItem = viewModel.hideOrUnhideAndReturnItem(currentItem)
+                Toast.makeText(context, if (newItem.isHidden) "Hidden" else "Unhidden", Toast.LENGTH_SHORT).show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun lockOrUnlockItem(status: Boolean) {
+    private fun updateUIforLockAndUnlockItem(status: Boolean) {
         newOrEdit_title_editText.isEnabled = status
         newOrEdit_body_editText.isEnabled = status
     }

@@ -58,4 +58,11 @@ interface DiaryItemDao {
      */
     @Query("SELECT * FROM diary_item_table WHERE tag = :tagName ORDER BY time_created")
     fun getItemsWithSameTag(tagName: String): LiveData<List<DiaryItem>>
+
+    /**
+     * Gets all hidden items from the database
+     * @return LiveData of `List` of all hidden items
+     */
+    @Query("SELECT * FROM diary_item_table WHERE is_hidden = :isHidden ORDER BY time_created")
+    fun getAllItemsByHiddenStatus(isHidden: Boolean): LiveData<List<DiaryItem>>
 }

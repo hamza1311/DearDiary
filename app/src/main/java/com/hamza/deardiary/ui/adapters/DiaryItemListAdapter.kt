@@ -45,6 +45,11 @@ class DiaryItemListAdapter(val context: Context) :
                     )
                 )
             }
+
+            itemView.setOnLongClickListener {
+                // TODO: Show delete confirmation and delete
+                true
+            }
         }
     }
 }
