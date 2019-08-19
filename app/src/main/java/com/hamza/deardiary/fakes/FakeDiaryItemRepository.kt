@@ -2,9 +2,9 @@ package com.hamza.deardiary.fakes
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
-import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
+import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
 
 class FakeDiaryItemRepository : DiaryItemRepository {
 
@@ -46,6 +46,18 @@ class FakeDiaryItemRepository : DiaryItemRepository {
             }
         }
         return object : LiveData<List<DiaryItem>>(list) {}
+    }
+
+    override fun getAllHiddenItems(): LiveData<List<DiaryItem>> {
+        serviceData.values.filter { it.isHidden }.let {
+            return object : LiveData<List<DiaryItem>>(it.toList()) {}
+        }
+    }
+
+    override fun getAllUnHiddenItems(): LiveData<List<DiaryItem>> {
+        serviceData.values.filter { !it.isHidden }.let {
+            return object : LiveData<List<DiaryItem>>(it.toList()) {}
+        }
     }
 
     @VisibleForTesting
