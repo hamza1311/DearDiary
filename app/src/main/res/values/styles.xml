@@ -22,10 +22,13 @@
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundMode">none</item>
         <item name="hintEnabled">false</item>
+        <item name="android:padding">1dp</item>
+        <item name="errorIconTint">@android:color/transparent</item>
     </style>
 
     <style name="TitleTextInputEditTextStyle">
-        <item name="android:inputType">textAutoCorrect|textPersonName|textCapSentences|textAutoComplete</item>
+        <item name="android:inputType">textAutoCorrect|textPersonName|textCapSentences|textAutoComplete|textMultiLine
+        </item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
     </style>
