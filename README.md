@@ -1,6 +1,6 @@
 # Dear Diary
 
-This is a native Android app written completely in Kotlin and based on Material Design. It lets you keep your digitally and gives you many features along the way.
+This is a native Android app written completely in Kotlin and based on Material Design. It lets you keep your diary digitally and gives you many features along the way.
 ### Screenshots:
 
 <table>
@@ -15,12 +15,12 @@ This is a native Android app written completely in Kotlin and based on Material 
 
 ### Usage:
 
-##### Installing from source:
+#### Installing from source:
 1. `git clone` this repository and load it in Android Studio or do *Checkout from Version Control* in Android Studio
 2. Let the IDE fetch the required dependencies
 3. Run the app
 
-##### Obtaining the binary (APK):
+#### Obtaining the binary (APK):
 You can get the APK file from github releases
 
 ### Contributions:
