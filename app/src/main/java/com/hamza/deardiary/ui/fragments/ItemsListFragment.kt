@@ -49,7 +49,7 @@ class ItemsListFragment : Fragment() {
             startActivity(Intent(context, NewUpdateOrViewDiaryItemActivity::class.java).putExtra("id", 0))
         }
 
-        viewModel.allItems.observe(this, Observer { items ->
+        viewModel.getUnhiddenItems().observe(this, Observer { items ->
             listAdapter.setItems(items)
         })
 
