@@ -25,4 +25,6 @@
     <string name="unhidden">Unhidden</string>
     <string name="all">All</string>
     <string name="hide_unhide_item">Hide/un-hide this item</string>
+    <string name="delete">Delete</string>
+    <string name="confirm_delete_text">Do you want to delete this item?</string>
 </resources>

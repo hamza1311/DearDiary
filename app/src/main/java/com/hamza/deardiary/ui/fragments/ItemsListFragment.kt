@@ -39,7 +39,7 @@ class ItemsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Setup recycler view
-        listAdapter = DiaryItemListAdapter(context = context!!)
+        listAdapter = DiaryItemListAdapter(context = context!!, viewModel = viewModel)
         list_recyclerView.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(context)
