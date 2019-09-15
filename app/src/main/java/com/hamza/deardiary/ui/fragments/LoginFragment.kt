@@ -26,7 +26,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (prefs.getBoolean("enablePasswordPreference", false)) {
+        if (prefs.getBoolean("enablePasswordPreference", false) || prefs.getString(
+                "setPassword",
+                ""
+            ) != ""
+        ) {
             login_button.setOnClickListener {
                 val password = login_password_editText.text.toString()
                 if (prefs.getString("setPassword", "") == password && password.isNotBlank()) {

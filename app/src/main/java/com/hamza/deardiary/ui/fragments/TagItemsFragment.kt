@@ -46,7 +46,8 @@ class TagItemsFragment : Fragment() {
         itemTagVewModel.get(args.id).observe(this, Observer { tag ->
             tagItems_tagName_textView.text = tag.tagName
             // Set the tag color on the image view
-            tagItems_tagName_textView.compoundDrawables.first().setTint(tag.tagColor)
+            tagItems_tagName_textView.compoundDrawables.first()
+                .setTint(tag.tagColor) // TODO: This is sometimes null which throws an NPE. FIX this
             diaryItemViewModel.getItemsByTag(tag).observe(this, Observer { list ->
                 listAdapter.setItems(list)
             })
