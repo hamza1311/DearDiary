@@ -26,5 +26,14 @@
             android:selectAllOnFocus="true"
             android:title="Set sign-off signature" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Preference category">
+        <DropDownPreference
+            android:defaultValue="Set by Battery Saver"
+            android:entries="@array/themeChoices"
+            android:entryValues="@array/themeChoices"
+            android:key="appTheme"
+            android:summary="succc"
+            android:title="theme" />
+    </PreferenceCategory>
 
 </PreferenceScreen>
