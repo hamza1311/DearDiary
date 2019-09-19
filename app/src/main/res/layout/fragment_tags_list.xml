@@ -21,7 +21,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/tagsList_fab"
         style="@style/FabStyle"
-        android:src="@drawable/ic_add_black_24dp"
+        android:src="@drawable/ic_add_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

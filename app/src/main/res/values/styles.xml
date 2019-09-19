@@ -6,11 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
@@ -31,6 +37,7 @@
         </item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:color">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="BodyTextInputEditTextStyle">
@@ -39,6 +46,7 @@
         </item>
         <item name="android:singleLine">false</item>
         <item name="android:gravity">start|top</item>
+        <item name="android:color">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="FabStyle" parent="Widget.MaterialComponents.FloatingActionButton">
@@ -48,6 +56,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="layout_anchorGravity">bottom|right</item>
+        <item name="backgroundTint">@color/fabContainer</item>
+        <item name="tint">@color/fabIcon</item>
     </style>
 
     <style name="TextViewStyle">
