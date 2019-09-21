@@ -61,7 +61,7 @@ class DiaryItemListAdapter(val context: Context, private val viewModel: DiaryIte
             return AlertDialog.Builder(context)
                 .setTitle(context.getString(R.string.delete))
                 .setMessage(context.getString(R.string.confirm_delete_text))
-                .setIcon(R.drawable.ic_delete_black_24dp)
+                .setIcon(R.drawable.ic_delete_24dp)
                 .setPositiveButton("Delete") { dialog, _ ->
                     deleteItem.invoke()
                     dialog.dismiss()

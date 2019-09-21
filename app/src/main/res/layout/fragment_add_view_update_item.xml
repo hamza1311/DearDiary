@@ -52,5 +52,5 @@
         style="@style/FabStyle"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/ic_check_black_24dp" />
+        android:src="@drawable/ic_check_24dp" />
 </RelativeLayout>

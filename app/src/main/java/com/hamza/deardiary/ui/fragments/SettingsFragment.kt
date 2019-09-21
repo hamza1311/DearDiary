@@ -1,6 +1,5 @@
 package com.hamza.deardiary.ui.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
@@ -10,6 +9,8 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.hamza.deardiary.R
 import com.hamza.deardiary.util.showSnackbar
+import com.hamza.deardiary.util.toTheme
+import java.util.*
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -52,23 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         findPreference<DropDownPreference>("appTheme")?.apply {
             setOnPreferenceChangeListener { preference, newValue ->
                 Log.d("ddd", "new val $newValue")
-                when (newValue.toString()) {
-                    "Light" -> {
-                        Log.d("ddd", "new val yayayy")
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    }
-                    "Dark" -> {
-                        Log.d("ddd", "new ddddval yayayy")
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    }
-                    else -> {
-                        if (Build.VERSION.SDK_INT >= 29) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                        } else {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
-                        }
-                    }
-                }
+                AppCompatDelegate.setDefaultNightMode(newValue.toString().toLowerCase(Locale.ROOT).toTheme())
                 true
             }
         }

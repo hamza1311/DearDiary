@@ -2,9 +2,9 @@
 <resources>
     <color name="colorPrimary">#3949AB</color>
     <color name="colorPrimaryDark">#283593</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#6200EE</color>
     <color name="colorRaisedButton">#7E57C2</color>
     <color name="colorSwipeToDeleteBg">#B40000</color>
-    <color name="fabContainer">@color/colorPrimaryDark</color>
-    <color name="fabIcon">#FFFFFF</color>
+    <color name="fabIcon">#000000</color>
+    <color name="drawableFill">#000000</color>
 </resources>

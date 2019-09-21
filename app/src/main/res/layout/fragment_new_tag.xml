@@ -6,27 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.NewTagFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/newTag_name_editTextLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newTag_save_button"
+        style="@style/ButtonStyle"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margins"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="@dimen/margins"
-        android:layout_marginBottom="@dimen/margins"
-        android:ems="10"
+        android:layout_margin="@dimen/margins"
+        android:layout_width="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/save"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/newTag_name_editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/tag_name"
-            android:inputType="textAutoCorrect|textPersonName|textCapSentences|textAutoComplete" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/newTag_colors_spinner" />
 
     <Spinner
         android:id="@+id/newTag_colors_spinner"
@@ -38,16 +30,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newTag_name_editTextLayout" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/newTag_save_button"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newTag_name_editTextLayout"
+        style="@style/StrokedTextInputLayoutStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margins"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/button_bg"
-        android:text="@string/save"
+        android:layout_marginStart="@dimen/margins"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="@dimen/margins"
+        android:layout_marginBottom="@dimen/margins"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTag_colors_spinner" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newTag_name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tag_name"
+            android:inputType="textAutoCorrect|textPersonName|textCapSentences|textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:id="@+id/tagsList_tag_imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_tag_black_24dp"
+        android:src="@drawable/ic_tag_24dp"
         android:contentDescription="@string/tag_icon" />
 
     <TextView
