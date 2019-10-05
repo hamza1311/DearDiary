@@ -5,4 +5,5 @@
     <color name="colorAccent">#BB86FC</color>
     <color name="fabIcon">#000000</color>
     <color name="drawableFill">#03DAC6</color>
+    <color name="itemTextColor">#FFFFFF</color>
 </resources>

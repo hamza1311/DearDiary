@@ -1,12 +1,19 @@
 package com.hamza.deardiary.util
 
+import android.content.res.Resources
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.KeyEvent
+import android.view.Menu
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModelFactory
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModelFactory
 
@@ -42,5 +49,19 @@ fun View.setBackPressToPopNavigationBackStackFragment() {
             }
             return@setOnKeyListener false
         }
+    }
+}
+
+/**
+ * Changes text color of given menu item to [R.color.itemTextColor]
+ */
+fun Menu.setTextColor(resources: Resources) {
+    this.forEach {
+        val spanString = SpannableString(it.title.toString())
+        val color = ResourcesCompat.getColor(resources, R.color.itemTextColor, null)
+        spanString.setSpan(
+            ForegroundColorSpan(color), 0, spanString.length, 0
+        )
+        it.title = spanString
     }
 }

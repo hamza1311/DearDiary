@@ -11,6 +11,7 @@ import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.setTextColor
 import kotlinx.android.synthetic.main.fragment_add_view_update_item.*
 
 /**
@@ -77,6 +78,7 @@ class AddViewUpdateItemFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflates the menu layout and show the menu
         inflater.inflate(R.menu.menu_new_update_or_view, menu)
+        menu.setTextColor(resources)
         super.onCreateOptionsMenu(menu, inflater)
     }
 

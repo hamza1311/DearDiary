@@ -7,4 +7,5 @@
     <color name="colorSwipeToDeleteBg">#B40000</color>
     <color name="fabIcon">#000000</color>
     <color name="drawableFill">#000000</color>
+    <color name="itemTextColor">#212121</color>
 </resources>

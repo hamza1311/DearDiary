@@ -13,6 +13,7 @@ import com.hamza.deardiary.ui.activities.NewUpdateOrViewDiaryItemActivity
 import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.setTextColor
 import kotlinx.android.synthetic.main.fragment_list.*
 
 /**
@@ -72,6 +73,7 @@ class ItemsListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflates the menu layout and show the menu
         inflater.inflate(R.menu.menu_items_list, menu)
+        menu.setTextColor(resources)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
