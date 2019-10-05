@@ -32,8 +32,7 @@
             android:entries="@array/themeChoices"
             android:entryValues="@array/themeChoices"
             android:key="appTheme"
-            android:summary="succc"
-            android:title="theme" />
+            android:title="@string/theme" />
     </PreferenceCategory>
 
 </PreferenceScreen>
