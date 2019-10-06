@@ -1,18 +1,18 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.ItemTag
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
-import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_new_tag.*
 
@@ -35,7 +35,7 @@ class NewTagFragment : Fragment() {
         newTag_colors_spinner.adapter =
             ArrayAdapter(context!!, android.R.layout.simple_spinner_dropdown_item, colors.keys.toList())
 
-        itemsTagViewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
+        itemsTagViewModel = obtainViewModel(ItemsTagViewModel::class.java)
 
         newTag_colors_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

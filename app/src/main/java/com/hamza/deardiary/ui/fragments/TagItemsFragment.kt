@@ -10,11 +10,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamza.deardiary.R
+import com.hamza.deardiary.arch.models.DiaryItem
+import com.hamza.deardiary.arch.models.ItemTag
 import com.hamza.deardiary.ui.adapters.TagItemsListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
-import com.hamza.deardiary.util.obtainDiaryItemViewModel
-import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_tag_items.*
 
@@ -38,17 +39,17 @@ class TagItemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        diaryItemViewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
-        itemTagVewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
+        diaryItemViewModel = obtainViewModel(DiaryItemViewModel::class.java)
+        itemTagVewModel = obtainViewModel(ItemsTagViewModel::class.java)
         listAdapter = TagItemsListAdapter(context!!)
 
 
-        itemTagVewModel.get(args.id).observe(this, Observer { tag ->
+        itemTagVewModel.get(args.id).observe(this, Observer<ItemTag> { tag ->
             tagItems_tagName_textView.text = tag.tagName
             // Set the tag color on the image view
             tagItems_tagName_textView.compoundDrawables.first()
                 .setTint(tag.tagColor) // TODO: This is sometimes null which throws an NPE. FIX this
-            diaryItemViewModel.getItemsByTag(tag).observe(this, Observer { list ->
+            diaryItemViewModel.getItemsByTag(tag).observe(this, Observer<List<DiaryItem>> { list ->
                 listAdapter.setItems(list)
             })
         })

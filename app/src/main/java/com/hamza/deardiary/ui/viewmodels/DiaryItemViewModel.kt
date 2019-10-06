@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.arch.models.ItemTag
-import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.DiaryItemRepository
 import kotlinx.coroutines.*
 
 class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewModel() {
-    val allItems: LiveData<List<DiaryItem>> = repository.getAllItems()
+    val allItems: LiveData<List<DiaryItem>> = repository.getAll()
     private var isSaved: Boolean = false
 
     fun insert(item: DiaryItem, shouldAddDearDiarySignOffSignature: Boolean, signOffSignature: String): Long =
@@ -20,10 +20,10 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
                 // Check if the setting for adding the signature is enabled
                 if (shouldAddDearDiarySignOffSignature) {
                     // If it is enabled, add the signature and save the item
-                    repository.addItem(addDearDiarySignOffSignature(item, signOffSignature))
+                    repository.add(addDearDiarySignOffSignature(item, signOffSignature))
                 } else {
                     // Otherwise, save it as is returned
-                    repository.addItem(item)
+                    repository.add(item)
                 }
             }
             // The as in `Deferred<Long>` is `await`ed on a background thread and
@@ -40,7 +40,7 @@ class DiaryItemViewModel(private val repository: DiaryItemRepository) : ViewMode
         repository.delete(id)
     }
 
-    fun get(id: Int) = repository.getItem(id)
+    fun get(id: Int) = repository.get(id)
 
     fun getItemsByTag(tag: ItemTag) = repository.getItemsWithSameTag(tag)
 

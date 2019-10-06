@@ -3,16 +3,17 @@ package com.hamza.deardiary.fakes
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import com.hamza.deardiary.arch.models.ItemTag
-import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.repositories.Repository
 
-class FakeItemsTagRepository : ItemsTagRepository {
+class FakeItemsTagRepository : Repository<ItemTag> {
     var serviceData = LinkedHashMap<Int, ItemTag>()
 
-    override suspend fun addTag(item: ItemTag) {
+    override suspend fun add(item: ItemTag): Long {
         serviceData[item.id] = item
+        return item.id.toLong()
     }
 
-    override suspend fun updateTag(item: ItemTag) {
+    override suspend fun update(item: ItemTag) {
         serviceData[item.id] = item
     }
 
@@ -20,11 +21,11 @@ class FakeItemsTagRepository : ItemsTagRepository {
         serviceData.remove(id)
     }
 
-    override fun getTag(id: Int): LiveData<ItemTag> {
+    override fun get(id: Int): LiveData<ItemTag> {
         return object : LiveData<ItemTag>(serviceData[id]) {}
     }
 
-    override fun getAllTags(): LiveData<List<ItemTag>> {
+    override fun getAll(): LiveData<List<ItemTag>> {
         addItemsForTest()
         return object : LiveData<List<ItemTag>>(serviceData.values.toList()) {}
     }

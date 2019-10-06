@@ -20,7 +20,7 @@ data class DiaryItem(
     @ColumnInfo(name = "time_created") val timeCreated: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "is_hidden") var isHidden: Boolean = false,
     @ColumnInfo(name = "is_locked") var isLocked: Boolean = false
-) {
+) : Model() {
     companion object {
         /**
          * Formats the long time retrieved from database into a presentable string

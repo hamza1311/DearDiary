@@ -1,4 +1,4 @@
-package com.hamza.deardiary.arch.repositories.diaryitem
+package com.hamza.deardiary.arch.repositories
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 /**
  * Implementation of [DiaryItemRepository] for use in [DiaryItemViewModel] to get data to be shown on UI.
  */
-class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryItemRepository {
+class DiaryItemRepository(private val diaryItemDao: DiaryItemDao) : Repository<DiaryItem> {
 
     /**
      * Tells DAO to add a [DiaryItem] object
@@ -19,7 +19,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return id of the added item.
      */
     @WorkerThread
-    override suspend fun addItem(item: DiaryItem): Long {
+    override suspend fun add(item: DiaryItem): Long {
         return diaryItemDao.addItem(item)
     }
 
@@ -40,7 +40,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return LiveData of the requested object.
      */
     @WorkerThread
-    override fun getItem(id: Int): LiveData<DiaryItem> {
+    override fun get(id: Int): LiveData<DiaryItem> {
         return diaryItemDao.getItem(id)
     }
 
@@ -50,7 +50,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return LiveData of List of all items.
      */
     @WorkerThread
-    override fun getAllItems(): LiveData<List<DiaryItem>> {
+    override fun getAll(): LiveData<List<DiaryItem>> {
         return diaryItemDao.getAllItems()
     }
 
@@ -71,7 +71,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return LiveData of List of the requested objects.
      */
     @WorkerThread
-    override fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>> {
+    fun getItemsWithSameTag(tag: ItemTag): LiveData<List<DiaryItem>> {
         return diaryItemDao.getItemsWithSameTag(tag.tagName)
     }
 
@@ -81,7 +81,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return LiveData of `List` of all hidden items
      */
     @WorkerThread
-    override fun getAllHiddenItems(): LiveData<List<DiaryItem>> {
+    fun getAllHiddenItems(): LiveData<List<DiaryItem>> {
         return diaryItemDao.getAllItemsByHiddenStatus(true)
     }
 
@@ -91,7 +91,7 @@ class MainDiaryItemRepository(private val diaryItemDao: DiaryItemDao) : DiaryIte
      * @return LiveData of `List` of all unhidden items
      */
     @WorkerThread
-    override fun getAllUnHiddenItems(): LiveData<List<DiaryItem>> {
+    fun getAllUnHiddenItems(): LiveData<List<DiaryItem>> {
         return diaryItemDao.getAllItemsByHiddenStatus(false)
     }
 }

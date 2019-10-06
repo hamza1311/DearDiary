@@ -20,7 +20,7 @@ interface ItemsTagDao {
      * @return id of the added item
      */
     @Insert
-    suspend fun addTag(item: ItemTag)
+    suspend fun addTag(item: ItemTag): Long
 
     /**
      * Updates a [ItemTag] object in the database

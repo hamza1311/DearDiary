@@ -10,7 +10,7 @@ import androidx.preference.PreferenceManager
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
-import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import com.hamza.deardiary.util.setTextColor
 import kotlinx.android.synthetic.main.fragment_add_view_update_item.*
 
@@ -42,7 +42,7 @@ class AddViewUpdateItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // The id passed is 0 for a new item
         currentId = activity?.intent?.extras?.getInt("id") ?: 0
-        viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
+        viewModel = obtainViewModel(DiaryItemViewModel::class.java)
 
         // Check if a new item is supposed to be created or an existing item is supposed to be edited
         if (currentId != 0) {

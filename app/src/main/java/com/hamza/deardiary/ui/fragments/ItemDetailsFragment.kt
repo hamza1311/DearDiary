@@ -13,8 +13,7 @@ import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
-import com.hamza.deardiary.util.obtainDiaryItemViewModel
-import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import com.hamza.deardiary.util.setBackPressToPopNavigationBackStackFragment
 import kotlinx.android.synthetic.main.fragment_item_details.*
 
@@ -36,8 +35,8 @@ class ItemDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
 
-        itemTagViewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
-        diaryItemViewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
+        itemTagViewModel = obtainViewModel(ItemsTagViewModel::class.java)
+        diaryItemViewModel = obtainViewModel(DiaryItemViewModel::class.java)
 
         // Get all the tags
         itemTagViewModel.allItems.observe(this, Observer { list ->

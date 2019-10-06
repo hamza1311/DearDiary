@@ -1,17 +1,17 @@
 package com.hamza.deardiary.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.adapters.ItemsTagListAdapter
 import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
-import com.hamza.deardiary.util.obtainItemTagViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import kotlinx.android.synthetic.main.fragment_tags_list.*
 
 class TagsListFragment : Fragment() {
@@ -29,7 +29,7 @@ class TagsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = obtainItemTagViewModel(ItemsTagViewModel::class.java)
+        viewModel = obtainViewModel(ItemsTagViewModel::class.java)
 
         listAdapter = ItemsTagListAdapter(context!!)
         tagsList_fab.setOnClickListener {

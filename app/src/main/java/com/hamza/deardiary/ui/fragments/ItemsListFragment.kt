@@ -12,7 +12,7 @@ import com.hamza.deardiary.R
 import com.hamza.deardiary.ui.activities.NewUpdateOrViewDiaryItemActivity
 import com.hamza.deardiary.ui.adapters.DiaryItemListAdapter
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
-import com.hamza.deardiary.util.obtainDiaryItemViewModel
+import com.hamza.deardiary.util.obtainViewModel
 import com.hamza.deardiary.util.setTextColor
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -34,7 +34,7 @@ class ItemsListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel = obtainDiaryItemViewModel(DiaryItemViewModel::class.java)
+        viewModel = obtainViewModel(DiaryItemViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
