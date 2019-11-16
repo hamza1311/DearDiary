@@ -14,33 +14,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.hamza.deardiary.R
-import com.hamza.deardiary.arch.repositories.ItemTagRepository
 import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
+import com.hamza.deardiary.ui.viewmodels.ItemsTagViewModel
 import com.hamza.deardiary.ui.viewmodels.ViewModelFactory
 
 fun <T : ViewModel> Fragment.obtainViewModel(viewModelClass: Class<T>): T {
     return when {
-        viewModelClass.isInstance(DiaryItemViewModel::class) -> {
+        viewModelClass.isAssignableFrom(DiaryItemViewModel::class.java) -> {
             val repository = (requireContext().applicationContext as App).diaryItemRepository
             ViewModelProvider(this, ViewModelFactory(repository)).get(viewModelClass)
         }
-        viewModelClass.isInstance(ItemTagRepository::class) -> {
+        viewModelClass.isAssignableFrom(ItemsTagViewModel::class.java) -> {
             val repository = (requireContext().applicationContext as App).itemTagRepository
             ViewModelProvider(this, ViewModelFactory(repository)).get(viewModelClass)
         }
-        else -> error("This shouldn't be executed")
+        else -> error("This shouldn't be executed - ${viewModelClass.simpleName}")
     }
 }
-
-/*fun <T : ViewModel> Fragment.obtainDiaryItemViewModel(viewModelClass: Class<T>): T {
-    val repository = (requireContext().applicationContext as App).diaryItemRepository
-    return ViewModelProvider(this, DiaryItemViewModelFactory(repository)).get(viewModelClass)
-}
-
-fun <T : ViewModel> Fragment.obtainItemTagViewModel(viewModelClass: Class<T>): T {
-    val repository = (requireContext().applicationContext as App).itemTagRepository
-    return ViewModelProvider(this, ItemsTagViewModelFactory(repository)).get(viewModelClass)
-}*/
 
 fun Fragment.showSnackbar(text: String) {
     this.activity?.run {
@@ -67,7 +57,7 @@ fun View.setBackPressToPopNavigationBackStackFragment() {
 }
 
 /**
- * Changes text color of given menu item to [R.color.itemTextColor]
+ * Changes text color of given menu item to [itemTextColor][R.color.itemTextColor]
  */
 fun Menu.setTextColor(resources: Resources) {
     this.forEach {
