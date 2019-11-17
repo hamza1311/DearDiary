@@ -26,7 +26,7 @@ class ItemTagViewModelTest {
     @Before
     fun setupViewModel() {
         repository = FakeItemsTagRepository()
-        viewModel = ItemsTagViewModel(repository)
+//        viewModel = ItemsTagViewModel(repository)
         repository.addItems(
             ItemTag(1, tagName = "tag1", tagColor = 2),
             ItemTag(2, tagName = "tag2", tagColor = 1),

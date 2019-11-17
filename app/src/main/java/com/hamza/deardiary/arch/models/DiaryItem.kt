@@ -2,6 +2,7 @@ package com.hamza.deardiary.arch.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.*
 
@@ -11,12 +12,19 @@ import java.util.*
  * @property[isLocked] Tells if the item can be edited without unlocking it
  * @property[isHidden] Tells if the item is hidden. This functionality is not implemented yet
  */
-@Entity(tableName = "diary_item_table")
+@Entity(
+    tableName = "diary_item_table",
+    foreignKeys = [ForeignKey(
+        entity = ItemTag::class,
+        parentColumns = arrayOf("tag_name"),
+        childColumns = arrayOf("tag")
+    )]
+)
 data class DiaryItem(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "text") var text: String,
-    @ColumnInfo(name = "tag") var tag: String,
+    @ColumnInfo(name = "tag") var tag: String?,
     @ColumnInfo(name = "time_created") val timeCreated: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "is_hidden") var isHidden: Boolean = false,
     @ColumnInfo(name = "is_locked") var isLocked: Boolean = false

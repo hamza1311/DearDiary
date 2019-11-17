@@ -2,6 +2,7 @@ package com.hamza.deardiary.arch.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
@@ -11,7 +12,7 @@ import androidx.room.PrimaryKey
  *
  * @property[tagColor] the color of tag
  */
-@Entity(tableName = "items_tag_table")
+@Entity(tableName = "items_tag_table", indices = [Index(value = ["tag_name"], unique = true)])
 data class ItemTag(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int = 0,
     @ColumnInfo(name = "tag_name") var tagName: String,

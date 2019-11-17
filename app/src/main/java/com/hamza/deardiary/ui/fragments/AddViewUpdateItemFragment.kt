@@ -58,7 +58,7 @@ class AddViewUpdateItemFragment : Fragment() {
             })
         } else {
             // Here a new is created. This creates a new item and stores it in [currentItem]
-            currentItem = DiaryItem(title = "title", text = "text", tag = "")
+            currentItem = DiaryItem(title = "title", text = "text", tag = null)
             setTitleAndBodyOnObject()
         }
 
