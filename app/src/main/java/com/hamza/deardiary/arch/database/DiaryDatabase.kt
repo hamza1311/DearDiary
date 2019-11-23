@@ -3,7 +3,6 @@ package com.hamza.deardiary.arch.database
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -39,30 +38,28 @@ abstract class DiaryDatabase : RoomDatabase() {
 
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                @Language("RoomSql") val c = database.query("SELECT * FROM diary_item_table")
-                c.moveToFirst()
+                @Language("RoomSql") val diaryItemsCursor =
+                    database.query("SELECT * FROM diary_item_table")
+                diaryItemsCursor.moveToFirst()
                 val items = mutableListOf<DiaryItem>()
-                println("-------------------------HERE-------------------")
-
                 do {
-                    println("696969696")
                     items.add(
                         DiaryItem(
-                            id = c.getInt(c.getColumnIndex("id")),
-                            title = c.getString(c.getColumnIndex("title")),
-                            text = c.getString(c.getColumnIndex("text")),
-                            tag = c.getString(c.getColumnIndex("tag")),
-                            timeCreated = c.getLong(c.getColumnIndex("time_created")),
-                            isHidden = c.getInt(c.getColumnIndex("is_hidden")) != 0,
-                            isLocked = c.getInt(c.getColumnIndex("is_locked")) != 0
-                        ).also { println(it) }
+                            id = diaryItemsCursor.getInt(diaryItemsCursor.getColumnIndex("id")),
+                            title = diaryItemsCursor.getString(diaryItemsCursor.getColumnIndex("title")),
+                            text = diaryItemsCursor.getString(diaryItemsCursor.getColumnIndex("text")),
+                            tag = diaryItemsCursor.getString(diaryItemsCursor.getColumnIndex("tag")),
+                            timeCreated = diaryItemsCursor.getLong(diaryItemsCursor.getColumnIndex("time_created")),
+                            isHidden = diaryItemsCursor.getInt(diaryItemsCursor.getColumnIndex("is_hidden")) != 0,
+                            isLocked = diaryItemsCursor.getInt(diaryItemsCursor.getColumnIndex("is_locked")) != 0
+                        )
                     )
-                } while (c.moveToNext())
-                println(items)
+                } while (diaryItemsCursor.moveToNext())
+
                 database.execSQL("DROP TABLE IF EXISTS `diary_item_table`")
                 database.execSQL("CREATE TABLE IF NOT EXISTS `diary_item_table` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `text` TEXT NOT NULL, `tag` TEXT, `time_created` INTEGER NOT NULL, `is_hidden` INTEGER NOT NULL, `is_locked` INTEGER NOT NULL, FOREIGN KEY(`tag`) REFERENCES `items_tag_table`(`tag_name`) ON UPDATE NO ACTION ON DELETE NO ACTION )")
+
                 items.forEach { item ->
-                    Log.d("item ddd", item.toString())
                     val values = ContentValues().apply {
                         put("id", item.id)
                         put("title", item.title)
@@ -74,6 +71,8 @@ abstract class DiaryDatabase : RoomDatabase() {
                     }
                     database.insert("diary_item_table", SQLiteDatabase.CONFLICT_NONE, values)
                 }
+
+                database.execSQL("CREATE UNIQUE INDEX IF NOT EXISTS `index_items_tag_table_tag_name` ON `items_tag_table` (`tag_name`)")
             }
         }
 
