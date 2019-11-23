@@ -4,18 +4,16 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.hamza.deardiary.arch.database.DiaryDatabase
-import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
-import com.hamza.deardiary.arch.repositories.diaryitem.MainDiaryItemRepository
-import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
-import com.hamza.deardiary.arch.repositories.itemstag.MainItemTagRepository
+import com.hamza.deardiary.arch.repositories.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.ItemTagRepository
 import java.util.*
 
 class App : Application() {
-    val diaryItemRepository: DiaryItemRepository
-        get() = MainDiaryItemRepository(DiaryDatabase.getDatabase(this.applicationContext).diaryItemDao())
+    val diaryItemRepository
+        get() = DiaryItemRepository(DiaryDatabase.getDatabase(this.applicationContext).diaryItemDao())
 
-    val itemTagRepository: ItemsTagRepository
-        get() = MainItemTagRepository(DiaryDatabase.getDatabase(this.applicationContext).tagsDao())
+    val itemTagRepository
+        get() = ItemTagRepository(DiaryDatabase.getDatabase(this.applicationContext).tagsDao())
 
     override fun onCreate() {
         super.onCreate()

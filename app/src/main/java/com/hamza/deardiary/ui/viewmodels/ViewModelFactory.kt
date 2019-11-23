@@ -4,22 +4,17 @@ package com.hamza.deardiary.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hamza.deardiary.arch.repositories.diaryitem.DiaryItemRepository
-import com.hamza.deardiary.arch.repositories.itemstag.ItemsTagRepository
+import com.hamza.deardiary.arch.models.Model
+import com.hamza.deardiary.arch.repositories.DiaryItemRepository
+import com.hamza.deardiary.arch.repositories.ItemTagRepository
+import com.hamza.deardiary.arch.repositories.Repository
 
-class DiaryItemViewModelFactory(private val repository: DiaryItemRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory<M : Model>(private val repository: Repository<M>) :
+    ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = with(modelClass) {
         when {
-            isAssignableFrom(DiaryItemViewModel::class.java) -> DiaryItemViewModel(repository)
-            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
-        } as T
-    }
-}
-
-class ItemsTagViewModelFactory(private val repository: ItemsTagRepository) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T = with(modelClass) {
-        when {
-            isAssignableFrom(ItemsTagViewModel::class.java) -> ItemsTagViewModel(repository)
+            isAssignableFrom(DiaryItemViewModel::class.java) -> DiaryItemViewModel(repository as DiaryItemRepository)
+            isAssignableFrom(ItemsTagViewModel::class.java) -> ItemsTagViewModel(repository as ItemTagRepository)
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         } as T
     }

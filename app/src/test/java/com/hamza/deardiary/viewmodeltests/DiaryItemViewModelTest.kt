@@ -29,7 +29,7 @@ class DiaryItemViewModelTest {
     @Before
     fun setupViewModel() {
         repository = FakeDiaryItemRepository()
-        viewModel = DiaryItemViewModel(repository = repository)
+//        viewModel = DiaryItemViewModel(repository = repository)
         repository.addItems(DiaryItem(id = 1, title = "Tit", text = "Txt", tag = "Tag"))
         repository.addItems(DiaryItem(id = 2, title = "Tit", text = "Txt", tag = "Tag"))
         repository.addItems(DiaryItem(id = 3, title = "Tit", text = "Txt", tag = "Tag"))

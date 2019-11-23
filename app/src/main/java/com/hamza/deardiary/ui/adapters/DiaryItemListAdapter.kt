@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hamza.deardiary.R
 import com.hamza.deardiary.arch.models.DiaryItem
 import com.hamza.deardiary.ui.activities.NewUpdateOrViewDiaryItemActivity
-import com.hamza.deardiary.ui.viewmodels.DiaryItemViewModel
 import kotlinx.android.synthetic.main.list_recycler_view_item.view.*
+import kotlinx.coroutines.Job
 
 
-class DiaryItemListAdapter(val context: Context, private val viewModel: DiaryItemViewModel) :
+class DiaryItemListAdapter(val context: Context, private val delete: (Int) -> Job) :
     RecyclerView.Adapter<DiaryItemListAdapter.ViewHolder>() {
     var list: List<DiaryItem> = listOf()
 
@@ -51,7 +51,7 @@ class DiaryItemListAdapter(val context: Context, private val viewModel: DiaryIte
 
             itemView.setOnLongClickListener {
                 deleteDialog(context) {
-                    viewModel.delete(diaryItem.id)
+                    delete(diaryItem.id)
                 }.show()
                 true
             }
